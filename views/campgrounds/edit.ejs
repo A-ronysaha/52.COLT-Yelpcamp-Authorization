@@ -1,0 +1,35 @@
+<% layout('layouts/style') %>
+<div class="row">
+        <h1 class="text-center">Edit the Things ::--</h1>
+        <div class="col-6 offset-3">
+            <form action="/campgrounds/<%= edit._id %>?_method=PUT" method="POST">
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title ::</label>
+                    <input type="text" class="form-control" id="title" name="camp[title]" value="<%= edit.title %>">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Location ::</label>
+                    <input type="text" class="form-control" id="location" name="camp[location]" value="<%= edit.location %>">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="image">Image URL ::</label>
+                    <input type="text" class="form-control" id="image" name="camp[image]" value="<%= edit.image %>">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="price">Campground Price ::</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="price-label">$</span>
+                        <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price"
+                            aria-describedby="price-label" name="camp[price]" value="<%= edit.price %>">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description ::</label>
+                    <textarea class="form-control" id="description"
+                        name="camp[description]"><%=edit.description %> </textarea>
+                </div>
+                <div class="mb-3"><button class="btn btn-info">UPDATE</button></div>
+            </form>
+            <a href="/campgrounds/<%= edit._id %> ">Back to id show page</a>
+        </div>
+    </div>

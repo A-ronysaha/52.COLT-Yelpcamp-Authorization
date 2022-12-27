@@ -1,0 +1,57 @@
+<% layout('layouts/style') %> 
+<div class="row mb-3">
+     <div class="col-6">
+        <div class="card">
+            <img src="<%= id.image %>" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h2 class="card-title"><%= id.title %></h2>
+              <h3 class="card-text"><%= id.description %></h3>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item text-muted"><%= id.location %> </li>
+              <li class="list-group-item"><b>Submited by :</b> <%= id.author.username %> </li>
+              <li class="list-group-item">$<%= id.price %> </li>
+              <li class="list-group-item">A third item</li>
+            </ul>
+            <!-- < if((currentUser)&&(id.author.equals(currentUser._id))){ %>  -->
+            <div class="card-body">
+                <a class="card-link btn btn-info" href="/campgrounds/<%= id._id %>/edit ">Edit</a>
+                <form class="d-inline mb-3" action="/campgrounds/<%= id._id %>?_method=delete" method="post">
+                    <button class="btn btn-danger">DELETE</button>
+                </form>
+            </div>
+            <!-- < } %>  -->
+          </div>
+      </div>
+      <div class="col-6">
+        <!-- < if(currentUser){ %>  -->
+        <h2>leave a Review</h2> 
+        <form  class="mb-3 validated-form" action="/campgrounds/<%= id._id %>/reviews" method="post" novalidate>
+          <div class="mb-3">
+            <label for="rating" class="form-label">Rating</label>
+            <input type="range" class="form-range" name="review[rating]" min="1" max="5" id="rating">
+          </div>
+          <div class="mb-3">
+            <label class="form-label"  for="body">Review</label>
+            <textarea name="review[body]" id="body" cols="30" rows="3" class="form-control" required></textarea>
+          </div>
+          <button class="btn btn-success">Submit</button>
+        </form>
+         <!-- < } %>  -->
+        <% for(let rev of id.reviews ){ %>
+          <div class="card mb-3">
+          <div class="card-body">
+            <p class="card-title"><b>Reviews </b>: <%=rev.body%> </p>
+            <h5 class="card-text">Rating is : <%=rev.rating%> </h5>
+            <h5 class="card-subtitle mb-2"> By : <%=rev.author.username%> </h5>
+            <form action="/campgrounds/<%= id._id %>/reviews/<%= rev._id %>?_method=DELETE" method="POST">
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </form>
+          </div>
+        </div>
+          <% } %>
+      </div>
+</div>
+
+
+   
